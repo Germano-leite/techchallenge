@@ -1,69 +1,90 @@
 package com.techchallenge.controller;
 
+import com.techchallenge.domain.dto.ContratacaoRequest;
+import com.techchallenge.domain.dto.ContratacaoResponse;
+import com.techchallenge.model.Cartao;
+import com.techchallenge.model.Cliente;
 import com.techchallenge.model.Contratacao;
 import com.techchallenge.model.StatusContratacao;
-import com.techchallenge.service.ContratacaoService;
+import com.techchallenge.repository.CartaoRepository;
+import com.techchallenge.repository.ClienteRepository;
+import com.techchallenge.repository.ContratacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/contratacoes")
+@Service
 public class ContratacaoController {
 
     @Autowired
-    private ContratacaoService contratacaoService;
+    private ContratacaoRepository contratacaoRepository;
 
-    @GetMapping
-    public List<Contratacao> listarTodas() {
-        return contratacaoService.listarTodas();
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private CartaoRepository cartaoRepository;
+
+    public List<ContratacaoResponse> listarTodas() {
+        return contratacaoRepository.findAll().stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Contratacao> buscarPorId(@PathVariable Long id) {
-        return contratacaoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-  
-    
-    @GetMapping("/cliente/{clienteId}")
-    public List<Contratacao> listarPorCliente(@PathVariable Long clienteId) {
-        return contratacaoService.listarPorCliente(clienteId);
+    public Optional<ContratacaoResponse> buscarPorId(Long id) {
+        return contratacaoRepository.findById(id).map(this::toResponse);
     }
 
-    @PostMapping
-    public ResponseEntity<Contratacao> contratarCartao(
-            @RequestParam Long clienteId,
-            @RequestParam Long cartaoId,
-            @RequestParam(defaultValue = "ATIVO") StatusContratacao status
-    ) {
-        try {
-            Contratacao contratacao = contratacaoService.contratarCartao(clienteId, cartaoId, status);
-            return ResponseEntity.ok(contratacao);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+    public List<ContratacaoResponse> listarPorCliente(Long clienteId) {
+        return contratacaoRepository.findAll().stream()
+                .filter(c -> c.getCliente().getId().equals(clienteId))
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
 
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Contratacao> atualizarStatus(
-            @PathVariable Long id,
-            @RequestParam StatusContratacao status
-    ) {
-        try {
-            Contratacao atualizada = contratacaoService.atualizarStatus(id, status);
-            return ResponseEntity.ok(atualizada);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ContratacaoResponse contratarCartao(ContratacaoRequest contratacaoRequest) {
+        Cliente cliente = clienteRepository.findById(contratacaoRequest.getClienteId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        Cartao cartao = cartaoRepository.findById(contratacaoRequest.getCartaoId())
+                .orElseThrow(() -> new RuntimeException("Cartão não encontrado"));
+
+        Contratacao contratacao = new Contratacao();
+        contratacao.setCliente(cliente);
+        contratacao.setCartao(cartao);
+        contratacao.setDataContratacao(LocalDate.now());
+        contratacao.setStatus(StatusContratacao.ATIVO); // Padrão 'ATIVO'
+
+        Contratacao contratacaoSalva = contratacaoRepository.save(contratacao);
+        return toResponse(contratacaoSalva);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        contratacaoService.deletar(id);
-        return ResponseEntity.noContent().build();
+    public ContratacaoResponse atualizarStatus(Long id, StatusContratacao novoStatus) {
+        return contratacaoRepository.findById(id).map(c -> {
+            c.setStatus(novoStatus);
+            Contratacao contratacaoAtualizada = contratacaoRepository.save(c);
+            return toResponse(contratacaoAtualizada);
+        }).orElseThrow(() -> new RuntimeException("Contratação não encontrada"));
+    }
+
+    public void deletar(Long id) {
+        contratacaoRepository.deleteById(id);
+    }
+
+    // Método de conversão de Entidade para DTO de Resposta
+    private ContratacaoResponse toResponse(Contratacao contratacao) {
+        ContratacaoResponse response = new ContratacaoResponse();
+        response.setId(contratacao.getId());
+        response.setClienteId(contratacao.getCliente().getId());
+        response.setCartaoId(contratacao.getCartao().getId());
+        // Correção: Converte LocalDate para LocalDateTime (se o DTO espera LocalDateTime)
+        // ou ajuste o DTO para LocalDate se não precisar da hora
+        response.setDataContratacao(contratacao.getDataContratacao().atStartOfDay());
+        response.setStatus(contratacao.getStatus().name());
+        return response;
     }
 }

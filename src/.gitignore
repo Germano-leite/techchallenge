@@ -1,0 +1,36 @@
+# Ignorar pastas e arquivos gerados pelo Maven
+/target/
+/pom.xml.tag
+/pom.xml.versionsBackup
+/pom.xml.releaseBackup
+/pom-release.xml
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de build e IDEs
+# Vscode
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+/out/
+
+# Ignorar arquivos de log
+*.log
+/logs/
+
+# Ignorar o arquivo de configuração de perfil local que contém a senha
+/src/main/resources/application-local.properties
+
+# Ignorar arquivos de dump de memória
+*.dump
