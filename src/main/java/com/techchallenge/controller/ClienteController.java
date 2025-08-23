@@ -4,7 +4,7 @@ import com.techchallenge.domain.dto.ClienteRequest;
 import com.techchallenge.domain.dto.ClienteResponse;
 import com.techchallenge.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
