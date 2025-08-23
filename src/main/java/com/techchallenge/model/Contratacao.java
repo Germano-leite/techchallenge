@@ -23,4 +23,6 @@ public class Contratacao {
 
     @Enumerated(EnumType.STRING)
     private StatusContratacao status;
+
+    private String numeroCartao;
 }
