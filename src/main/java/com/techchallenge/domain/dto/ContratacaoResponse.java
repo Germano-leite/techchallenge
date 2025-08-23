@@ -24,4 +24,7 @@ public class ContratacaoResponse {
 
     @Schema(description = "ID do cartão que foi contratado.")
     private Long cartaoId;
+
+    @Schema(description = "Número do cartão gerado na contratação")
+    private String numeroCartao;
 }

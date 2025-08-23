@@ -17,7 +17,7 @@ public class CartaoRequest {
     private String nome;
 
     @NotBlank(message = "O tipo não pode estar vazio.")
-    @Schema(description = "Tipo do cartão (Crédito ou Débito).", example = "Crédito")
+    @Schema(description = "Tipo do cartão (Crédito ou Débito).", example = "CREDITO")
     private String tipo;
 
     @NotNull(message = "A anuidade não pode estar vazia.")
@@ -25,6 +25,6 @@ public class CartaoRequest {
     private BigDecimal anuidade;
 
     @NotBlank(message = "A bandeira não pode estar vazia.")
-    @Schema(description = "Bandeira do cartão (ex: Visa, MasterCard).", example = "MasterCard")
+    @Schema(description = "Bandeira do cartão (ex: Visa, MasterCard).", example = "MASTERCARD")
     private String bandeira;
 }

@@ -1,13 +1,15 @@
 package com.techchallenge.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 
 @Entity //Mapeia a classe como uma tabela para o BD relacional
-@Data //Getter Setter e mais. Nao é recomendado. Lembrar de substituir
+@Getter
+@Setter 
 public class Cliente {
 
     @Id
