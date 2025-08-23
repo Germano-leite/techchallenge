@@ -72,7 +72,7 @@ public class ClienteService {
         // É comum que a entidade Cliente já tenha um campo 'dataCadastro'
         // Se a sua entidade não tiver, você pode definir como LocalDateTime.now()
         // ou remover o campo do DTO se ele não for relevante para a resposta
-        response.setDataCadastro(LocalDateTime.now());
+        response.setDataCadastro(LocalDateTime.now().toString());
         return response;
     }
 }
