@@ -68,11 +68,7 @@ public class ClienteService {
         response.setCpf(cliente.getCpf());
         response.setEmail(cliente.getEmail());
         response.setDataNascimento(cliente.getDataNascimento().toString());
-        // Ajuste no campo de data de cadastro
-        // É comum que a entidade Cliente já tenha um campo 'dataCadastro'
-        // Se a sua entidade não tiver, você pode definir como LocalDateTime.now()
-        // ou remover o campo do DTO se ele não for relevante para a resposta
-        response.setDataCadastro(LocalDateTime.now().toString());
+        //response.setDataCadastro(LocalDateTime.now().toString());
         return response;
     }
 }

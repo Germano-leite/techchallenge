@@ -26,8 +26,8 @@ async function carregarClientesECartoes() {
 document.getElementById("contratacao-form").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const clienteId = document.getElementById("clienteSelect").value;
-    const cartaoId = document.getElementById("cartaoSelect").value;
+    const clienteId = document.getElementById("clienteId").value;
+    const cartaoId = document.getElementById("cartaoId").value;
 
     // Objeto JavaScript que corresponde ao DTO esperado pela API
     const contratacaoData = {
@@ -66,7 +66,7 @@ document.getElementById("contratacao-form").addEventListener("submit", async fun
 
 clienteSelect.addEventListener("change", () => {
   const id = clienteSelect.value;
-  if (id) listarContratacoes(id);
+  if (id) listarTodasContratacoes;
 });
 
 async function cancelarContratacao(id) {

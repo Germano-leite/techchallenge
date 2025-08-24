@@ -25,6 +25,6 @@ public class ClienteResponse {
     @Schema(description = "Data de nascimento do cliente.")
     private String dataNascimento;
 
-    @Schema(description = "Data e hora do cadastro do cliente.", example = "2025-08-11T10:00:00Z")
-    private String dataCadastro;
+    //@Schema(description = "Data e hora do cadastro do cliente.", example = "2025-08-11T10:00:00Z")
+    //private String dataCadastro;
 } 
