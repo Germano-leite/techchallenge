@@ -10,6 +10,7 @@ C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\domai
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\domain\dto\ClienteResponse.java
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\domain\dto\ContratacaoRequest.java
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\domain\dto\ContratacaoResponse.java
+C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\exception\BusinessException.java
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\exception\ResourceNotFoundException.java
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\model\Bandeira.java
 C:\Users\germa\Documents\Dev\techchallenge\src\main\java\com\techchallenge\model\Cartao.java
