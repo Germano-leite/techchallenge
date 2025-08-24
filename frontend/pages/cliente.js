@@ -1,4 +1,4 @@
-const clienteAPI = "http://localhost:8080/clientes";
+const clienteAPI = "http://localhost:8080/api/clientes";
 
 document.getElementById("cliente-form").addEventListener("submit", async function (e) {
   e.preventDefault();

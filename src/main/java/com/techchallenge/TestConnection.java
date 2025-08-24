@@ -10,7 +10,7 @@ public class TestConnection {
         String password = "passwd";
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-            System.out.println("✅ Conexão bem-sucedida!");
+            System.out.println("##  Conexao bem-sucedida!  ##");
         } catch (Exception e) {
             e.printStackTrace();
         }

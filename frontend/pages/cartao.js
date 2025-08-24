@@ -1,4 +1,4 @@
-const cartaoAPI = "http://localhost:8080/cartoes";
+const cartaoAPI = "http://localhost:8080/api/cartoes";
 
 document.getElementById("cartao-form").addEventListener("submit", async function (e) {
   e.preventDefault();
