@@ -21,10 +21,13 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 @Tag(name = "Clientes", description = "Endpoints para o gerenciamento de clientes.")
 public class ClienteController {
-
+    
+    //Injeção do serviço de cliente
     @Autowired
     private ClienteService clienteService;
 
+    //Lista todos os clientes
+    //Retorna uma lista de ClienteResponse  
     @GetMapping
     @Operation(summary = "Listar todos os clientes",
                description = "Retorna uma lista completa de todos os clientes cadastrados no sistema.")
@@ -33,6 +36,8 @@ public class ClienteController {
         return clienteService.listarTodos();
     }
 
+    //Busca um cliente pelo ID
+    //Retorna um ClienteResponse ou 404 se não encontrado   
     @GetMapping("/{id}")
     @Operation(summary = "Buscar cliente por ID", description = "Retorna os dados de um cliente específico.")
     @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso",
@@ -44,17 +49,21 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    //Cria um novo cliente
+    //Recebe os dados do cliente no ClienteRequest   
     @PostMapping
     @Operation(summary = "Cadastrar um novo cliente",
                description = "Cria um novo cliente com nome, CPF, e-mail e data de nascimento.")
     @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso",
                  content = @Content(schema = @Schema(implementation = ClienteResponse.class)))
-    @ApiResponse(responseCode = "400", description = "Dados de requisição inválidos.")
+    @ApiResponse(responseCode = "400", description = "CPF já cadastrado do sistema.")
     public ResponseEntity<ClienteResponse> criar(@RequestBody ClienteRequest clienteRequest) {
         ClienteResponse clienteResponse = clienteService.salvar(clienteRequest);
         return ResponseEntity.created(URI.create("/api/clientes/" + clienteResponse.getId())).body(clienteResponse);
     }
 
+    //Atualiza um cliente existente
+    //Recebe o ID do cliente e os novos dados no ClienteRequest
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar cliente", description = "Atualiza os dados de um cliente existente.")
     @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso",
@@ -69,6 +78,8 @@ public class ClienteController {
         }
     }
 
+    //Remove um cliente pelo ID
+    //Verifica se o cliente existe antes de remover e se possui contratações
     @DeleteMapping("/{id}")
     @Operation(summary = "Remover cliente", description = "Remove um cliente do sistema permanentemente.")
     @ApiResponse(responseCode = "204", description = "Cliente removido com sucesso (Sem conteúdo).")

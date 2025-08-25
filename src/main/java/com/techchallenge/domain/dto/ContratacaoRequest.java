@@ -2,11 +2,10 @@ package com.techchallenge.domain.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 @Schema(description = "Dados para a contratação de um cartão por um cliente.")
 public class ContratacaoRequest {
 

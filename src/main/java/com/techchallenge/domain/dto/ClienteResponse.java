@@ -1,12 +1,10 @@
 package com.techchallenge.domain.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 //import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Schema(description = "Dados de um cliente retornados pela API.")
 public class ClienteResponse {
 

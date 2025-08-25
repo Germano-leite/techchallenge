@@ -19,26 +19,44 @@ import java.util.stream.Collectors;
 public class ContratacaoService {
 
     // Final garante que os repositórios sejam inicializados no construtor
+    // Usa injeção de dependência via construtor
+    // Repositórios necessários para operações de contratação
     private final ContratacaoRepository contratacaoRepository;
     private final ClienteRepository clienteRepository;
     private final CartaoRepository cartaoRepository;
 
+    // Lista todas as contratações
+    // Retorna uma lista de ContratacaoResponse
     public List<ContratacaoResponse> listarTodas() {
         return contratacaoRepository.findAll().stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
+    // Busca uma contratação pelo ID
+    // Retorna um Optional de ContratacaoResponse
     public Optional<ContratacaoResponse> buscarPorId(Long id) {
         return contratacaoRepository.findById(id).map(this::toResponse);
     }
 
+    // Lista todas as contratações de um cliente específico pelo ID do cliente
+    // Retorna uma lista de ContratacaoResponse
     public List<ContratacaoResponse> listarPorCliente(Long clienteId) {
+        
+        // Verifica se o cliente com o ID fornecido realmente existe no banco de dados.
+        if (!clienteRepository.existsById(clienteId)) {
+            throw new ResourceNotFoundException("Cliente com ID " + clienteId + " não encontrado.");
+        }
+        
+        // Se o cliente existir, busca todas as contratações associadas a esse cliente.
         return contratacaoRepository.findByClienteId(clienteId).stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
     
+    // Realiza uma nova contratação de cartão para um cliente
+    // Recebe os dados da contratação no ContratacaoRequest
+    // Retorna os dados da contratação criada no ContratacaoResponse
     public ContratacaoResponse contratarCartao(ContratacaoRequest request) {
         Cliente cliente = clienteRepository.findById(request.getClienteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente com ID " + request.getClienteId() + " não encontrado"));
@@ -55,6 +73,9 @@ public class ContratacaoService {
         return toResponse(contratacaoSalva);
     }
 
+    // Atualiza o status de uma contratação existente
+    // Recebe o ID da contratação e o novo status
+    // Retorna os dados da contratação atualizada no ContratacaoResponse
     public ContratacaoResponse atualizarStatus(Long id, StatusContratacao novoStatus) {
         Contratacao contratacao = contratacaoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contratação com ID " + id + " não encontrada"));
@@ -64,6 +85,8 @@ public class ContratacaoService {
         return toResponse(contratacaoAtualizada);
     }
 
+    // Remove uma contratação pelo ID
+    // Verifica se a contratação existe antes de remover
     public void deletar(Long id) {
         if (!contratacaoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Contratação com ID " + id + " não encontrada");
@@ -71,6 +94,7 @@ public class ContratacaoService {
         contratacaoRepository.deleteById(id);
     }
 
+    // Converte uma entidade Contratacao para ContratacaoResponse
     private ContratacaoResponse toResponse(Contratacao contratacao) {
         ContratacaoResponse response = new ContratacaoResponse();
         response.setId(contratacao.getId());

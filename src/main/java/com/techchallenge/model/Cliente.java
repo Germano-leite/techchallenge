@@ -22,7 +22,8 @@ public class Cliente {
     private String nome;
 
     @NotBlank(message = "O CPF não pode ser vazio.")
-    //@CPF(message = "CPF inválido.") // Usa a validação específica de CPF
+    //@CPF(message = "CPF inválido.") // Usa a validação específica de CPF - Desabilitado para facilitar testes
+    @Column(unique = true) // Garante que o CPF seja único no banco de dados   
     private String cpf;
 
     @NotBlank(message = "O e-mail não pode ser vazio.")

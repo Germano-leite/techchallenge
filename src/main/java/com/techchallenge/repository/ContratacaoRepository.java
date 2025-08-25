@@ -11,5 +11,8 @@ public interface ContratacaoRepository extends JpaRepository<Contratacao, Long> 
 
     // Verifica se existem contratações associadas a um cliente específico
     boolean existsByClienteId(Long clienteId);
+
+    // Verifica se existem contratações associadas a um cartão específico
+    boolean existsByCartaoId(Long cartaoId);
 }
 
