@@ -83,6 +83,7 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Remover cliente", description = "Remove um cliente do sistema permanentemente.")
     @ApiResponse(responseCode = "204", description = "Cliente removido com sucesso (Sem conteúdo).")
+    @ApiResponse(responseCode = "400", description = "Cliente não pode ser removido pois possui contratação.")
     @ApiResponse(responseCode = "404", description = "Cliente não encontrado.")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         clienteService.deletar(id);

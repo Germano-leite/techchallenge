@@ -94,6 +94,7 @@ public class CartaoController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Remover cartão", description = "Remove um cartão do sistema permanentemente.")
     @ApiResponse(responseCode = "204", description = "Cartão removido com sucesso (Sem conteúdo).")
+    @ApiResponse(responseCode = "400", description = "Cartão não pode ser removido pois está contratado por algum cliente.")
     @ApiResponse(responseCode = "404", description = "Cartão não encontrado.")
     public ResponseEntity<Void> deletar(@PathVariable final Long id) {
         cartaoService.deletar(id);

@@ -24,7 +24,7 @@ Spring Boot 3
 
 Spring Data JPA
 
-PostgreSQL (Banco de Dados Relacional)
+PostgreSQL 17 (Banco de Dados Relacional)
 
 Lombok
 
@@ -69,7 +69,7 @@ Observação: Não é necessário criar as tabelas manualmente. O Spring Data JP
 
 3. Compile Execute a aplicação
 
-//O comando mvn install vai baixar as dependias, compilar e rodar testes de integridade na aplicacao.
+//O comando mvn install vai baixar as depencias, compilar e rodar testes de integridade na aplicacao.
 Bash
 
 mnv install 

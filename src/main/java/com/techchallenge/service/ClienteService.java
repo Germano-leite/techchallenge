@@ -93,7 +93,8 @@ public class ClienteService {
     private Cliente toEntity(ClienteRequest request) {
         Cliente cliente = new Cliente();
         cliente.setNome(request.getNome());
-        cliente.setCpf(request.getCpf());
+        String cpfLimpo = request.getCpf().replaceAll("[^0-9]", ""); // Sanitiza o CPF removendo pontos e traços
+        cliente.setCpf(cpfLimpo);
         cliente.setEmail(request.getEmail());
         cliente.setDataNascimento(LocalDate.parse(request.getDataNascimento()));
         return cliente;
