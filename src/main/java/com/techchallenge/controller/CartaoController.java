@@ -1,7 +1,7 @@
 package com.techchallenge.controller;
 
-import com.techchallenge.domain.dto.CartaoRequest; // Importa o DTO de Requisição
-import com.techchallenge.domain.dto.CartaoResponse; // Importa o DTO de Resposta
+import com.techchallenge.dto.request.CartaoRequest;
+import com.techchallenge.dto.response.CartaoResponse;
 import com.techchallenge.service.CartaoService; // Mantém a injeção do seu serviço original
 
 // Importações das anotações do Swagger

@@ -1,7 +1,7 @@
 package com.techchallenge.controller;
 
-import com.techchallenge.domain.dto.ContratacaoRequest;
-import com.techchallenge.domain.dto.ContratacaoResponse;
+import com.techchallenge.dto.request.ContratacaoRequest;
+import com.techchallenge.dto.response.ContratacaoResponse;
 import com.techchallenge.model.StatusContratacao;
 import com.techchallenge.service.ContratacaoService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,7 +1,7 @@
 package com.techchallenge.service;
 
-import com.techchallenge.domain.dto.ContratacaoRequest;
-import com.techchallenge.domain.dto.ContratacaoResponse;
+import com.techchallenge.dto.request.ContratacaoRequest;
+import com.techchallenge.dto.response.ContratacaoResponse;
 import com.techchallenge.exception.ResourceNotFoundException;
 import com.techchallenge.model.*;
 import com.techchallenge.repository.CartaoRepository;

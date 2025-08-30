@@ -1,4 +1,4 @@
-package com.techchallenge.domain.dto;
+package com.techchallenge.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

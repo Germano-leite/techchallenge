@@ -1,7 +1,7 @@
 package com.techchallenge.controller;
 
-import com.techchallenge.domain.dto.ClienteRequest;
-import com.techchallenge.domain.dto.ClienteResponse;
+import com.techchallenge.dto.request.ClienteRequest;
+import com.techchallenge.dto.response.ClienteResponse;
 import com.techchallenge.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;

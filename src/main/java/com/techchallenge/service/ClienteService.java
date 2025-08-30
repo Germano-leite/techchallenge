@@ -1,10 +1,10 @@
 package com.techchallenge.service;
 
-import com.techchallenge.domain.dto.ClienteRequest;
-import com.techchallenge.domain.dto.ClienteResponse;
 import com.techchallenge.model.Cliente;
 import com.techchallenge.repository.ClienteRepository;
 import com.techchallenge.repository.ContratacaoRepository;
+import com.techchallenge.dto.request.ClienteRequest;
+import com.techchallenge.dto.response.ClienteResponse;
 import com.techchallenge.exception.BusinessException;
 import com.techchallenge.exception.ResourceNotFoundException;
 

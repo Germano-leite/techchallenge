@@ -1,7 +1,7 @@
 package com.techchallenge.service;
 
-import com.techchallenge.domain.dto.CartaoRequest;
-import com.techchallenge.domain.dto.CartaoResponse;
+import com.techchallenge.dto.request.CartaoRequest;
+import com.techchallenge.dto.response.CartaoResponse;
 import com.techchallenge.exception.BusinessException;
 import com.techchallenge.exception.ResourceNotFoundException;
 import com.techchallenge.model.Bandeira;
